@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ErtebatYar - Customer Relationship Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Login/Register Screen -->
+        <div id="auth-screen" class="screen active">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h1><i class="fas fa-handshake"></i> ErtebatYar</h1>
+                    <p>Customer Relationship Management System</p>
+                </div>
+                
+                <div class="auth-tabs">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="register">Register</button>
+                </div>
+                
+                <div id="login-form" class="auth-form active">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+                
+                <div id="register-form" class="auth-form">
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="regStoreName">Store Name</label>
+                            <input type="text" id="regStoreName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regProductType">Product Type</label>
+                            <select id="regProductType" required>
+                                <option value="">Select Product Type</option>
+                                <option value="fashion">Fashion & Clothing</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home & Garden</option>
+                                <option value="beauty">Beauty & Cosmetics</option>
+                                <option value="sports">Sports & Fitness</option>
+                                <option value="books">Books & Media</option>
+                                <option value="food">Food & Beverages</option>
+                                <option value="automotive">Automotive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="regEmail">Email</label>
+                            <input type="email" id="regEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regPassword">Password</label>
+                            <input type="password" id="regPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div id="dashboard-screen" class="screen">
+            <header class="header">
+                <div class="header-left">
+                    <h2><i class="fas fa-store"></i> <span id="storeName">My Store</span></h2>
+                    <span class="product-type" id="productType">Fashion & Clothing</span>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-secondary" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </header>
+
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tab="customers">
+                    <i class="fas fa-users"></i> Customers
+                </button>
+                <button class="nav-tab" data-tab="interactions">
+                    <i class="fas fa-comments"></i> Interactions
+                </button>
+                <button class="nav-tab" data-tab="followups">
+                    <i class="fas fa-bell"></i> Follow-ups
+                </button>
+                <button class="nav-tab" data-tab="workflow">
+                    <i class="fas fa-project-diagram"></i> Workflow
+                </button>
+            </nav>
+
+            <main class="main-content">
+                <!-- Customers Tab -->
+                <div id="customers-tab" class="tab-content active">
+                    <div class="tab-header">
+                        <h3>Customer Management</h3>
+                        <button class="btn btn-primary" id="addCustomerBtn">
+                            <i class="fas fa-plus"></i> Add Customer
+                        </button>
+                    </div>
+                    
+                    <div class="search-bar">
+                        <input type="text" id="customerSearch" placeholder="Search customers...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    
+                    <div class="customers-grid" id="customersGrid">
+                        <!-- Customers will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Interactions Tab -->
+                <div id="interactions-tab" class="tab-content">
+                    <div class="tab-header">
+                        <h3>Customer Interactions</h3>
+                        <button class="btn btn-primary" id="addInteractionBtn">
+                            <i class="fas fa-plus"></i> Record Interaction
+                        </button>
+                    </div>
+                    
+                    <div class="interactions-list" id="interactionsList">
+                        <!-- Interactions will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Follow-ups Tab -->
+                <div id="followups-tab" class="tab-content">
+                    <div class="tab-header">
+                        <h3>Follow-up Reminders</h3>
+                    </div>
+                    
+                    <div class="followups-list" id="followupsList">
+                        <!-- Follow-ups will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Analytics Tab -->
+                <div id="analytics-tab" class="tab-content">
+                    <div class="tab-header">
+                        <h3>Customer Analytics</h3>
+                    </div>
+                    
+                    <div class="analytics-dashboard" id="analyticsDashboard">
+                        <!-- Analytics will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Workflow Tab -->
+                <div id="workflow-tab" class="tab-content">
+                    <div class="tab-header">
+                        <h3>Customer Relationship Workflow</h3>
+                        <div class="workflow-controls">
+                            <select id="workflowCustomerSelect">
+                                <option value="">انتخاب مشتری</option>
+                            </select>
+                            <button class="btn btn-primary" id="generateWorkflowBtn">
+                                <i class="fas fa-sync"></i> تولید نمودار
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-container" id="workflowContainer">
+                        <div class="workflow-placeholder">
+                            <i class="fas fa-project-diagram"></i>
+                            <h4>نمودار استراتژی روابط مشتری</h4>
+                            <p>مشتری مورد نظر را انتخاب کنید تا نمودار استراتژی روابط نمایش داده شود</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Customer Modal -->
+    <div id="customerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="customerModalTitle">Add New Customer</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="customerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerName">Full Name</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number</label>
+                        <input type="tel" id="customerPhone" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerEmail">Email</label>
+                        <input type="email" id="customerEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerBudget">Usual Budget</label>
+                        <select id="customerBudget" required>
+                            <option value="">Select Budget Range</option>
+                            <option value="0-50">$0 - $50</option>
+                            <option value="50-100">$50 - $100</option>
+                            <option value="100-200">$100 - $200</option>
+                            <option value="200-500">$200 - $500</option>
+                            <option value="500+">$500+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerBrands">Favorite Brands</label>
+                        <input type="text" id="customerBrands" placeholder="e.g., Nike, Adidas, Apple">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerColors">Preferred Colors</label>
+                        <input type="text" id="customerColors" placeholder="e.g., Blue, Red, Black">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerLastPurchase">Last Purchase Date</label>
+                        <input type="date" id="customerLastPurchase">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerOccasions">Special Occasions</label>
+                        <input type="text" id="customerOccasions" placeholder="e.g., Birthday, Anniversary">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelCustomer">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Customer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Interaction Modal -->
+    <div id="interactionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Record Customer Interaction</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="interactionForm">
+                <div class="form-group">
+                    <label for="interactionCustomer">Customer</label>
+                    <select id="interactionCustomer" required>
+                        <option value="">Select Customer</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="interactionType">Interaction Type</label>
+                        <select id="interactionType" required>
+                            <option value="">Select Type</option>
+                            <option value="call">Phone Call</option>
+                            <option value="visit">Store Visit</option>
+                            <option value="purchase">Purchase</option>
+                            <option value="inquiry">Product Inquiry</option>
+                            <option value="complaint">Complaint</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="interactionDate">Date</label>
+                        <input type="datetime-local" id="interactionDate" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="interactionNotes">What did they want?</label>
+                    <textarea id="interactionNotes" rows="3" placeholder="Describe what the customer was looking for..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="interactionPurchase">What did they buy?</label>
+                    <textarea id="interactionPurchase" rows="2" placeholder="List items purchased or considered..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="interactionReaction">Customer Reaction</label>
+                    <select id="interactionReaction">
+                        <option value="">Select Reaction</option>
+                        <option value="very-positive">Very Positive</option>
+                        <option value="positive">Positive</option>
+                        <option value="neutral">Neutral</option>
+                        <option value="negative">Negative</option>
+                        <option value="very-negative">Very Negative</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="interactionFollowup">Follow-up Needed</label>
+                    <textarea id="interactionFollowup" rows="2" placeholder="What follow-up action is needed?"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelInteraction">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Record Interaction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
